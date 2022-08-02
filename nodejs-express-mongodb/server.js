@@ -15,7 +15,7 @@ db.mongoose
     process.exit();
   });
 var corsOptions = {
-  origin: "http://35.90.153.139:8081"
+  origin: "http://localhost:8081"
 };
 app.use(cors(corsOptions));
 // parse requests of content-type - application/json
