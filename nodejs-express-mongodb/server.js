@@ -14,14 +14,7 @@ db.mongoose
     console.log("Cannot connect to the database!", err);
     process.exit();
   });
-var corsOptions = {
-  origin: "http://35.90.153.139:8081"
-};
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*"); // <<<<<<<<<<<<
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
+const options = {withCredentials: true, 'access-control-allow-origin': "http://localhost:4200/", 'Content-Type': 'application/json'}
 app.use(cors(corsOptions));
 // parse requests of content-type - application/json
 app.use(express.json());
