@@ -11,7 +11,8 @@ exports.create = (req, res) => {
       const student = new Student({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        studentId: req.body.studentId
+        studentId: req.body.studentId,
+        isStudent: req.body.isStudent
       });
       // Save Tutorial in the database
       student
@@ -36,6 +37,27 @@ exports.findAll = (req, res) => {
       res.status(500).send({
         message:
           err.message || "Some error occurred while retrieving tutorials."
+      });
+    });
+};
+
+exports.delete = (req, res) => {
+  const id = req.params.id;
+  Tutorial.findByIdAndRemove(id)
+    .then(data => {
+      if (!data) {
+        res.status(404).send({
+          message: `Cannot delete Tutorial with id=${id}. Maybe Tutorial was not found!`
+        });
+      } else {
+        res.send({
+          message: "Tutorial was deleted successfully!"
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Could not delete Tutorial with id=" + id
       });
     });
 };

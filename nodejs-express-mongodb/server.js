@@ -15,8 +15,13 @@ db.mongoose
     process.exit();
   });
 var corsOptions = {
-  origin: "http://localhost:8081"
+  origin: "http://35.90.153.139:8081"
 };
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*"); // <<<<<<<<<<<<
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 app.use(cors(corsOptions));
 // parse requests of content-type - application/json
 app.use(express.json());
@@ -26,6 +31,7 @@ app.use(express.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to kevinwang application." });
 });
+
 // set port, listen for requests
 require("./app/routes/tutorial.routes")(app);
 require("./app/routes/student.routes")(app);

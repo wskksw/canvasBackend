@@ -8,7 +8,7 @@ module.exports = mongoose => {
           firstName: String,
           lastName: String,
           studentId: Number,
-          isStudent: Boolean,
+          isStudent: Boolean
         },
       )
     );
