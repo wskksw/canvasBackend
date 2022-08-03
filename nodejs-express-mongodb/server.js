@@ -1,6 +1,18 @@
 const express = require("express");
 const cors = require("cors");
+
 const app = express();
+
+const corsOptions = {withCredentials: true, 'access-control-allow-origin': "http://localhost:8081", 'Content-Type': 'application/json'}
+
+app.use(cors(corsOptions));
+
+// parse requests of content-type - application/json
+app.use(express.json());
+
+// parse requests of content-type - application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }));
+
 const db = require("./app/models");
 db.mongoose
   .connect(db.url, {
@@ -14,16 +26,12 @@ db.mongoose
     console.log("Cannot connect to the database!", err);
     process.exit();
   });
-const options = {withCredentials: true, 'access-control-allow-origin': "http://localhost:4200/", 'Content-Type': 'application/json'}
-app.use(cors(corsOptions));
-// parse requests of content-type - application/json
-app.use(express.json());
-// parse requests of content-type - application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: true }));
+
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to kevinwang application." });
+  res.json({ message: "Welcome to kevin application." });
 });
+
 
 // set port, listen for requests
 require("./app/routes/tutorial.routes")(app);

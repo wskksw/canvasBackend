@@ -1,3 +1,3 @@
 module.exports = {
-    url: "mongodb://http://35.90.153.139:8080/quinn_db"
+    url: "mongodb://127.0.0.1:27017/quinn_db"
   };
